@@ -25,7 +25,8 @@ int set_room(lemin_t *infos, char *str, char type)
     }
     room->name[len] = 0;
     for (rooms_t *tmp = infos->map; tmp; tmp = tmp->next)
-        if (my_strcmp(tmp->name, room->name) == 0)
+        if (my_strcmp(tmp->name, room->name) == 0
+        || (tmp->x == room->x && tmp->y == room->y))
             return (ERROR_FORMAT);
     str = &str[1];
     room->type = type;
