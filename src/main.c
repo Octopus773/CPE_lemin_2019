@@ -16,6 +16,7 @@ int main(void)
 
     if (!lemin || !ants || ! end_room)
         return (ERROR);
+    my_printf("#moves\n");
     while (play_a_turn(ants, end_room));
     return (0);
 }

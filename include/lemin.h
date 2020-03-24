@@ -42,6 +42,7 @@ typedef struct s_ant
 {
     int id;
     lily_list *current_room;
+    lily_list *old_room;
 } ant_t;
 
 int word_len(char *str, char s);

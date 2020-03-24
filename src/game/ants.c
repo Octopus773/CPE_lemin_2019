@@ -45,6 +45,7 @@ ant_t *get_ants(lemin_t *lemin)
     for (unsigned i = 0; i < lemin->nb_ant; i++) {
         ants[i].id = id++;
         ants[i].current_room = start_room;
+        ants[i].old_room = NULL;
     }
     ants[lemin->nb_ant].id = -1;
     ants[lemin->nb_ant].current_room = NULL;
