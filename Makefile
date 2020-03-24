@@ -19,7 +19,7 @@ INCLUDE = -I include
 
 CFLAGS = $(INCLUDE) -Wall -Wshadow -Wextra
 
-LDFLAGS = -L lib/my -lmy -L lib/lily -llily -lncurses
+LDFLAGS = -L lib/my -lmy -L lib/lily -llily
 
 BIN = lem_in
 
