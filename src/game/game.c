@@ -13,8 +13,14 @@
 bool move_ant(ant_t *ant)
 {
     rooms_t *room;
+    rooms_t *tmp;
     bool move_made = false;
 
+    tmp = get_best_room(ant);
+    if (tmp) {
+        ant->old_room = ant->current_room;
+        ant->current_room = tmp;
+    }
     // SHOULD USE PATHFINDING HERE.
     if (ant->current_room != ant->old_room) {
         room = ant->current_room->data;

@@ -46,6 +46,9 @@ int set_room(lemin_t *infos, char *str, char type)
     }
     room->name[len] = 0;
     room->type = type;
+    room->occupied = false;
+    room->score = 0;
+    room->is_proceeded = false;
     room_set_coord(room, str);
     FOREACH(rooms_t, tmp, i, infos->map)
         if (my_strcmp(tmp->name, room->name) == 0
