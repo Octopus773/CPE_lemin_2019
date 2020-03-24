@@ -36,7 +36,7 @@ ant_t *get_ants(lemin_t *lemin)
     static int id = 1;
     ant_t *ants;
     lily_list *start_room = get_start_room(lemin);
-    
+
     if (!lemin || !start_room)
         return (NULL);
     ants = malloc(sizeof(*ants) * (lemin->nb_ant + 1));

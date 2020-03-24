@@ -42,29 +42,24 @@ char *get_second_link(char *str)
 
 }
 
-rooms_t *find_node(rooms_t *rooms, char *str)
+rooms_t *find_node(lemin_t *infos, char *str)
 {
-    for (; rooms; rooms = rooms->next) {
-        if (my_strcmp(rooms->name, str) == 0)
-            return (rooms);
-    }
-    return (rooms);
+    FOREACH(rooms_t, room, i, infos->map)
+        if (my_strcmp(room->name, str) == 0)
+            return (room);
+    ENDFOREACH(i, infos->map)
+    return (NULL);
 }
 
 int create_link(char *first, char *second, lemin_t *infos)
 {
-    rooms_t *tmp = find_node(infos->map, first);
-    rooms_t *link_to = find_node(infos->map, second);
-    connections_t *link = NULL;
+    rooms_t *tmp = find_node(infos, first);
+    rooms_t *link_to = find_node(infos, second);
 
     if (!tmp || !link_to)
         return (ERROR_FORMAT);
-    link = malloc(sizeof(connections_t));
-    if (!link)
-        return (ERROR_MALLOC);
-    link->name = link_to->name;
-    link->next = tmp->links;
-    tmp->links = link;
+    lily_add_node(&tmp->links, lily_create_node(link_to), 0);
+    lily_add_node(&link_to->links, lily_create_node(tmp), 0);
     return (0);
 }
 

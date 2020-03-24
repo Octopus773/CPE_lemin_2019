@@ -10,16 +10,16 @@
 
 #define ERROR 84
 
-#define COMMENT         (7)
-#define LINK            (6)
+#define COMMENT (7)
+#define LINK (6)
 
-#define ERROR_READ      (4)
-#define ERROR_FORMAT    (5)
-#define ERROR_MALLOC    (84)
+#define ERROR_READ (4)
+#define ERROR_FORMAT (5)
+#define ERROR_MALLOC (84)
 
-#define START           (1)
-#define END             (2)
-#define ROOM            (3)
+#define START (1)
+#define END (2)
+#define ROOM (3)
 
 #include "lily.h"
 
@@ -47,9 +47,12 @@ typedef struct s_ant
 int word_len(char *str, char s);
 int get_nb_ants(lemin_t *infos);
 int set_links(lemin_t *infos, char *str);
-int get_rooms(lemin_t *infos);
 lemin_t *get_lemin(void);
 ant_t *get_ants(lemin_t *lemin);
 bool play_a_turn(ant_t *ants, lily_list *end_room);
+
+lily_list *get_start_room(lemin_t *lemin);
+lily_list *get_end_room(lemin_t *lemin);
+int get_rooms(lemin_t *infos);
 
 #endif /* !LEMIN_H_ */

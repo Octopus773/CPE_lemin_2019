@@ -1,4 +1,3 @@
-
 /*
 ** EPITECH PROJECT, 2020
 ** get_rooms.c
@@ -48,12 +47,12 @@ int set_room(lemin_t *infos, char *str, char type)
     room->name[len] = 0;
     room->type = type;
     room_set_coord(room, str);
-    for (rooms_t *tmp = infos->map; tmp; tmp = tmp->next)
+    FOREACH(rooms_t, tmp, i, infos->map)
         if (my_strcmp(tmp->name, room->name) == 0
         || (tmp->x == room->x && tmp->y == room->y))
             return (ERROR_FORMAT);
-    room->next = infos->map;
-    infos->map = room;
+    ENDFOREACH(i, infos->map)
+    lily_add_node(&infos->map, lily_create_node(room), 0);
     return (0);
 }
 
