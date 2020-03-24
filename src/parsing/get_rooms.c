@@ -6,10 +6,32 @@
 ** get_rooms
 */
 
-#include "lemin.h"
 #include "my.h"
-#include <malloc.h>
+#include "lemin.h"
 #include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+int set_links(lemin_t *infos, char *str);
+
+void print_room(rooms_t *room)
+{
+    my_putstr(room->name);
+    my_putchar(' ');
+    my_put_nbr(room->x);
+    my_putchar(' ');
+    my_put_nbr(room->y);
+    my_putchar('\n');
+}
+
+void room_set_coord(rooms_t *room, char *str)
+{
+    room->x = my_getnbr(str);
+    for (; *str && *str != ' '; str = &str[1]);
+    str = &str[1];
+    room->y = my_getnbr(str);
+    print_room(room);
+}
 
 int set_room(lemin_t *infos, char *str, char type)
 {
@@ -19,21 +41,17 @@ int set_room(lemin_t *infos, char *str, char type)
     if (!room)
         return (ERROR_MALLOC);
     room->name = malloc(sizeof(char) * (len + 1));
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i <= len; i++) {
         room->name[i] = *str;
         str = &str[1];
     }
     room->name[len] = 0;
+    room->type = type;
+    room_set_coord(room, str);
     for (rooms_t *tmp = infos->map; tmp; tmp = tmp->next)
         if (my_strcmp(tmp->name, room->name) == 0
         || (tmp->x == room->x && tmp->y == room->y))
             return (ERROR_FORMAT);
-    str = &str[1];
-    room->type = type;
-    room->x = my_getnbr(str);
-    for (; *str && *str != ' '; str = &str[1]);
-    str = &str[1];
-    room->y = my_getnbr(str);
     room->next = infos->map;
     infos->map = room;
     return (0);
@@ -64,8 +82,9 @@ int get_rooms(lemin_t *infos)
     int type;
     char *str = NULL;
     size_t nb = 0;
+    int nb_tunnels = 0;
 
-    while (getline(&str, &nb, stdin) >= 2) {
+    while (getline(&str, &nb, stdin) > 1) {
         nb = 0;
         type = get_type(str);
         if (type == 0) {
@@ -77,6 +96,7 @@ int get_rooms(lemin_t *infos)
                 free(str);
                 return (ERROR_FORMAT);
             }
+            my_putstr("##start\n");
             set_room(infos, str, START);
             nb = 0;
         }
@@ -85,6 +105,7 @@ int get_rooms(lemin_t *infos)
                 free(str);
                 return (ERROR_FORMAT);
             }
+            my_putstr("##end\n");
             set_room(infos, str, END);
             nb = 0;
         }
@@ -92,10 +113,13 @@ int get_rooms(lemin_t *infos)
             if (set_room(infos, str, ROOM) == ERROR_FORMAT)
                 return (ERROR_FORMAT);
         if (type == LINK) {
+            if (nb_tunnels == 0)
+                my_putstr("#tunnels\n");
             if (set_links(infos, str) == ERROR_FORMAT) {
                 free(str);
                 return (ERROR_FORMAT);
             }
+            nb_tunnels = 1;
         }
     }
     return (0);

@@ -7,20 +7,23 @@
 
 int my_getnbr(char const *str)
 {
-    int ret = 0;
-    int flag = 1;
+    long nbr = 0;
+    int is_neg = 0;
 
-    for (int i = 0; str[i] && str[i] != '\n'; i++) {
-        ret *= 10;
-        if (!(str[i] >= '0' && str[i] <= '9') && str[i] != '-')
-            return (0);
-        if (str[i] == '-' && i == 0) {
-            flag = -1;
-            continue;
-        }
-        else if (str[i] == '-')
-            return (0);
-        ret += str[i] - 48;
+    for (int n = 0; str[n]; n++) {
+        if (str[n] == '+')
+            nbr = nbr;
+        if (str[n] == '-')
+            is_neg++;
+        if (str[n] >= '0' && str[n] <= '9')
+            nbr = nbr * 10 + (str[n] - '0');
+        if (!(str[n] >= '0' && str[n] <= '9')
+        && str[n] != '+' && str[n] != '-')
+            break;
     }
-    return (ret * flag);
+    if (is_neg % 2 == 1)
+        nbr *= -1;
+    if (nbr > 2147483647 || nbr < -2147483648)
+        nbr = 0;
+    return ((int)nbr);
 }

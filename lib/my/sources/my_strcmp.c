@@ -5,24 +5,17 @@
 ** task06 day06
 */
 
-static int find_relation(char const *s1, char const *s2, int i)
-{
-    if (s1[i] > s2[i])
-        return (1);
-    else if (s1[i] < s2[i])
-        return (-1);
-    else
-        return (0);
-}
-
 int my_strcmp(char const *s1, char const *s2)
 {
-    int i = 0;
-    while ((s1[i] != '\0') || (s2[i] != '\0')) {
-        if (s1[i] != s2[i]) {
-            return (find_relation(s1, s2, i));
-        }
-        i++;
+    int letter = 0;
+
+    while (s1[letter] && s2[letter] == '\0') {
+        if (s1[letter] > s2[letter])
+            return (1);
+        else if (s1[letter] < s2[letter])
+            return (-1);
+        letter++;
     }
     return (0);
 }
+
