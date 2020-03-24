@@ -41,8 +41,8 @@ typedef struct s_lemin
 typedef struct s_ant
 {
     int id;
-    lily_list *current_room;
-    lily_list *old_room;
+    rooms_t *current_room;
+    rooms_t *old_room;
 } ant_t;
 
 int word_len(char *str, char s);
@@ -50,10 +50,10 @@ int get_nb_ants(lemin_t *infos);
 int set_links(lemin_t *infos, char *str);
 lemin_t *get_lemin(void);
 ant_t *get_ants(lemin_t *lemin);
-bool play_a_turn(ant_t *ants, lily_list *end_room);
+bool play_a_turn(ant_t *ants, rooms_t *end_room);
 
-lily_list *get_start_room(lemin_t *lemin);
-lily_list *get_end_room(lemin_t *lemin);
+rooms_t *get_start_room(lemin_t *lemin);
+rooms_t *get_end_room(lemin_t *lemin);
 int get_rooms(lemin_t *infos);
 
 #endif /* !LEMIN_H_ */
