@@ -10,7 +10,9 @@ SRC = src/parsing/get_nb_ants.c \
 	  src/parsing/get_rooms.c \
 	  src/parsing/links.c \
 	  src/parsing/parsing1.c \
-	  src/parsing/word_len.c
+	  src/parsing/word_len.c \
+	  src/game/game.c \
+	  src/game/ants.c
 
 OBJ = $(SRC:%.c=%.o)
 OBJ += src/main.o

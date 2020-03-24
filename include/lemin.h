@@ -8,6 +8,8 @@
 #ifndef LEMIN_H_
 #define LEMIN_H_
 
+#define ERROR 84
+
 #define COMMENT         (7)
 #define LINK            (6)
 
@@ -19,31 +21,35 @@
 #define END             (2)
 #define ROOM            (3)
 
-typedef struct s_connections {
-    char *name;
-    struct s_connections *next;
-} connections_t;
+#include "lily.h"
 
 typedef struct s_rooms{
     char type;
     char *name;
     unsigned int x;
     unsigned int y;
-    connections_t *links;
-    struct s_rooms *next;
+    lily_list *links;
 }rooms_t;
 
 
 typedef struct s_lemin
 {
     unsigned int nb_ant;
-    rooms_t *map;
+    lily_list *map;
 }lemin_t;
+
+typedef struct s_ant
+{
+    int id;
+    lily_list *current_room;
+} ant_t;
 
 int word_len(char *str, char s);
 int get_nb_ants(lemin_t *infos);
 int set_links(lemin_t *infos, char *str);
 int get_rooms(lemin_t *infos);
 lemin_t *get_lemin(void);
+ant_t *get_ants(lemin_t *lemin);
+bool play_a_turn(ant_t *ants, lily_list *end_room);
 
 #endif /* !LEMIN_H_ */
