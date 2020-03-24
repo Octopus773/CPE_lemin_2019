@@ -1,32 +1,23 @@
 /*
-** EPITECH PROJECT, 2019
-** task1 day13
+** EPITECH PROJECT, 2020
+** main.c
 ** File description:
-** none
+** main
 */
 
-#include "my.h"
-#include "lily.h"
+#include "lemin.h"
 
-void print_ls(lily_list *first)
+int main(void)
 {
-    lily_list *start_node = first->prev;
-
-    while (first != start_node) {
-        my_putstr(first->data);
-        my_putchar('\n');
-        first = first->next;
+    lemin_t *t = get_lemin();
+    rooms_t *tmp = t->map;
+    printf("##nb ant\n%d\n\n", t->nb_ant);
+    for(; tmp; tmp = tmp->next) {
+        printf("##name: %s\n", tmp->name);
+        printf("##cord: %d %d\n", tmp->x, tmp->y);
+        printf("##type (1: START, 2: END, 3: ROOM): %d\n", tmp->type);
+        printf("##connections\n");
+        for (connections_t *a = tmp->links; a; a = a->next)
+            printf("\t%s\n", a->name);
     }
-    my_putstr(first->data);
-    my_putchar('\n');
-}
-
-
-int main(int ac, char **av)
-{
-    (void)ac;
-    lily_list *first = lily_create_list_from_array((void **)av);
-    void *cmp_ptr = &my_strcmp;
-    lily_sort_list_az(&first, cmp_ptr);
-    print_ls(first);
 }

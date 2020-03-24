@@ -40,5 +40,9 @@ typedef struct s_lemin
     rooms_t *map;
 }lemin_t;
 
+int word_len(char *str, char s);
+int get_nb_ants(lemin_t *infos);
+int set_links(lemin_t *infos, char *str);
+int get_rooms(lemin_t *infos);
 
 #endif /* !LEMIN_H_ */

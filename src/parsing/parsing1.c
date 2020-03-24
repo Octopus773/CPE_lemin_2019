@@ -5,13 +5,8 @@
 ** parsing1
 */
 
-#include "my.h"
 #include "lemin.h"
-#include <stdlib.h>
-
-int get_nb_ants(lemin_t *infos);
-
-int get_rooms(lemin_t *infos);
+#include <malloc.h>
 
 lemin_t *alloc_infos(void)
 {
@@ -32,7 +27,6 @@ lemin_t *get_lemin(void)
         return (NULL);
     if (get_nb_ants(infos) != 0)
         return (NULL);
-    my_putstr("#rooms\n");
     if (get_rooms(infos) != 0)
         return (NULL);
     return (infos);

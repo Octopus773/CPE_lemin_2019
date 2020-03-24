@@ -7,7 +7,8 @@
 
 #include "lemin.h"
 #include "my.h"
-#include <stdlib.h>
+#include <stddef.h>
+#include <malloc.h>
 
 char *get_first_link(char *str)
 {
@@ -80,6 +81,5 @@ int set_links(lemin_t *infos, char *str)
     create_link(second, first, infos);
     free(first);
     free(second);
-    my_putstr(str);
     return (0);
 }

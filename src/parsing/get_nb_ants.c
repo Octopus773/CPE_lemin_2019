@@ -6,6 +6,7 @@
 */
 
 #include "lemin.h"
+#include "my.h"
 #include <stdio.h>
 
 int check_nb_ants(char *str, lemin_t *infos)

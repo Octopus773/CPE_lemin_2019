@@ -7,6 +7,8 @@
 */
 
 #include "lemin.h"
+#include "my.h"
+#include <malloc.h>
 #include <stdio.h>
 
 int set_room(lemin_t *infos, char *str, char type)
