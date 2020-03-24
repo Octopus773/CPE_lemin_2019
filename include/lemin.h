@@ -44,5 +44,6 @@ int word_len(char *str, char s);
 int get_nb_ants(lemin_t *infos);
 int set_links(lemin_t *infos, char *str);
 int get_rooms(lemin_t *infos);
+lemin_t *get_lemin(void);
 
 #endif /* !LEMIN_H_ */

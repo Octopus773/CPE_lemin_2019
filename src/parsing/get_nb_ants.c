@@ -8,12 +8,14 @@
 #include "lemin.h"
 #include "my.h"
 #include <stdio.h>
+#include <malloc.h>
 
 int check_nb_ants(char *str, lemin_t *infos)
 {
     for (int i = 0; str[i] && str[i] != '\n'; i++)
         if (str[i] < '0' || str[i] > '9')
             return (ERROR_FORMAT);
+    (void)infos;
     return (0);
 }
 
