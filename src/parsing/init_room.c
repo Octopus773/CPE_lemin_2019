@@ -23,7 +23,6 @@ int set_room(lemin_t *infos, char *str, char type)
 {
     rooms_t *room = malloc(sizeof(rooms_t));
     int len = word_len(str, ' ');
-
     if (!room)
         return (ERROR_MALLOC);
     room->name = malloc(sizeof(char) * (len + 1));
