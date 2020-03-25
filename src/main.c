@@ -11,6 +11,8 @@
 int main(void)
 {
     lemin_t *lemin = get_lemin();
+    if (!lemin)
+        return (ERROR);
     ant_t *ants = get_ants(lemin);
     rooms_t *end_room = get_end_room(lemin);
 

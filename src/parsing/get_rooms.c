@@ -101,6 +101,7 @@ int get_rooms(lemin_t *infos)
             }
             my_putstr("##start\n");
             set_room(infos, str, START);
+            nb_tunnels++;
             nb = 0;
         }
         else if (type == COMMENT && my_strcmp(str, "##end") == 0) {
@@ -110,20 +111,25 @@ int get_rooms(lemin_t *infos)
             }
             my_putstr("##end\n");
             set_room(infos, str, END);
+            nb_tunnels++;
             nb = 0;
         }
         if (type == ROOM)
             if (set_room(infos, str, ROOM) == ERROR_FORMAT)
                 return (ERROR_FORMAT);
         if (type == LINK) {
-            if (nb_tunnels == 0)
+            if (nb_tunnels == 2)
                 my_putstr("#tunnels\n");
+            else if (nb_tunnels <= 1)
+                return (84);
             if (set_links(infos, str) == ERROR_FORMAT) {
                 free(str);
-                return (ERROR_FORMAT);
+                return (ERROR);
             }
-            nb_tunnels = 1;
+            nb_tunnels = 3;
         }
     }
+    if (nb_tunnels != 3)
+        return (ERROR);
     return (0);
 }
