@@ -30,6 +30,7 @@ bool play_a_turn(ant_t *ants, rooms_t *end_room)
 {
     bool done = true;
     bool move_made = false;
+    static bool played_last_turn = false;
 
     for (int i = 0; ants[i].id >= 0; i++) {
         if (ants[i].current_room == end_room)
@@ -41,5 +42,10 @@ bool play_a_turn(ant_t *ants, rooms_t *end_room)
     }
     if (!done && move_made)
         write(1, "\n", 1);
+    if (!played_last_turn && !move_made) {
+        my_printf("Too bad, the ants are stuck. Leave the anthill now.\n");
+        return (false);
+    }
+    played_last_turn = move_made;
     return (!done);
 }
