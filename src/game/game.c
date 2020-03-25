@@ -14,7 +14,6 @@ bool move_ant(ant_t *ant)
 {
     rooms_t *new_room = get_best_room(ant);
 
-   // my_printf("Moving to the room: %s (score: %d), occupied: %s\n", new_room->name, new_room->score, new_room->occupied ? "True" : "False");
     if (!new_room->occupied && new_room->type != START) {
         ant->current_room->occupied = false;
         if (new_room->type != END)

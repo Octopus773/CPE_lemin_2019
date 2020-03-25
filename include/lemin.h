@@ -48,13 +48,6 @@ typedef struct s_ant
     rooms_t *old_room;
 } ant_t;
 
-
-typedef struct s_path
-{
-    rooms_t *room;
-    int score;
-} path_t;
-
 int word_len(char *str, char s);
 int get_nb_ants(lemin_t *infos);
 int set_links(lemin_t *infos, char *str);
