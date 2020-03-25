@@ -207,6 +207,8 @@ lily_list *iterator = list; do { type *item = iterator->data;
 } while (iterator != head); }
 #define ENDFOREACH_NONEXT(iterator, head) } while (iterator != head); }
 
+#define CONTINUE(iterator) iterator = iterator->next; continue
+
 
 #define ENUMERATE(type, item, index, iterator, list, count) if (list) { \
 size_t count = lily_get_list_length(list); lily_list *iterator = list; \

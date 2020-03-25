@@ -4,3 +4,4 @@ lem_in
 ut
 *.gc*
 .vscode/
+vgcore.*

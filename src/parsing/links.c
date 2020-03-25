@@ -59,7 +59,6 @@ int create_link(char *first, char *second, lemin_t *infos)
     if (!tmp || !link_to)
         return (ERROR_FORMAT);
     lily_add_node(&tmp->links, lily_create_node(link_to), 0);
-    lily_add_node(&link_to->links, lily_create_node(tmp), 0);
     return (0);
 }
 
