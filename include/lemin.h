@@ -8,7 +8,7 @@
 #ifndef LEMIN_H_
 #define LEMIN_H_
 
-#define ERROR 84
+#define ERROR (84)
 
 #define COMMENT (7)
 #define LINK (6)

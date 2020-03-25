@@ -13,6 +13,8 @@
 
 int set_links(lemin_t *infos, char *str);
 
+int set_room(lemin_t *infos, char *str, char type);
+
 void print_room(rooms_t *room)
 {
     my_putstr(room->name);
@@ -30,34 +32,6 @@ void room_set_coord(rooms_t *room, char *str)
     str = &str[1];
     room->y = my_getnbr(str);
     print_room(room);
-}
-
-int set_room(lemin_t *infos, char *str, char type)
-{
-    rooms_t *room = malloc(sizeof(rooms_t));
-    int len = word_len(str, ' ');
-
-    if (!room)
-        return (ERROR_MALLOC);
-    room->name = malloc(sizeof(char) * (len + 1));
-    for (int i = 0; i <= len; i++) {
-        room->name[i] = *str;
-        str = &str[1];
-    }
-    room->name[len] = 0;
-    room->type = type;
-    room->occupied = false;
-    room->score = 0;
-    room->links = NULL;
-    room->is_proceeded = false;
-    room_set_coord(room, str);
-    FOREACH(rooms_t, tmp, i, infos->map)
-        if (my_strcmp(tmp->name, room->name) == 0
-        || (tmp->x == room->x && tmp->y == room->y))
-            return (ERROR_FORMAT);
-    ENDFOREACH(i, infos->map)
-    lily_add_node(&infos->map, lily_create_node(room), 0);
-    return (0);
 }
 
 int get_type(char *str)
@@ -116,12 +90,12 @@ int get_rooms(lemin_t *infos)
         }
         if (type == ROOM)
             if (set_room(infos, str, ROOM) == ERROR_FORMAT)
-                return (ERROR_FORMAT);
+                return (ERROR);
         if (type == LINK) {
             if (nb_tunnels == 2)
                 my_putstr("#tunnels\n");
             else if (nb_tunnels <= 1)
-                return (84);
+                return (ERROR);
             if (set_links(infos, str) == ERROR_FORMAT) {
                 free(str);
                 return (ERROR);
