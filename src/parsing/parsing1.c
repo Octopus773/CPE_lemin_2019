@@ -33,7 +33,6 @@ lemin_t *get_lemin(void)
     if (get_nb_ants(infos) != 0)
         return (NULL);
     my_putstr("#rooms\n");
-    if (get_rooms(infos) != 0)
-        return (NULL);
+    get_rooms(infos);
     return (infos);
 }
