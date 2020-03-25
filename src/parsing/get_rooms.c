@@ -56,53 +56,17 @@ int get_type(char *str)
 
 int get_rooms(lemin_t *infos)
 {
-    int type;
     char *str = NULL;
     size_t nb = 0;
     int nb_tunnels = 0;
 
     while (getline(&str, &nb, stdin) > 1) {
-        nb = 0;
-        type = get_type(str);
-        if (type == 0) {
-            free(str);
-            return (ERROR_FORMAT);
-        }
-        if (type == COMMENT && my_strcmp(str, "##start") == 0) {
-            if (getline(&str, &nb, stdin) <= 0) {
-                free(str);
-                return (ERROR_FORMAT);
-            }
-            my_putstr("##start\n");
-            set_room(infos, str, START);
-            nb_tunnels++;
-            nb = 0;
-        }
-        else if (type == COMMENT && my_strcmp(str, "##end") == 0) {
-            if (getline(&str, &nb, stdin) <= 0) {
-                free(str);
-                return (ERROR_FORMAT);
-            }
-            my_putstr("##end\n");
-            set_room(infos, str, END);
-            nb_tunnels++;
-            nb = 0;
-        }
-        if (type == ROOM)
-            if (set_room(infos, str, ROOM) == ERROR_FORMAT)
-                return (ERROR);
-        if (type == LINK) {
-            if (nb_tunnels == 2)
-                my_putstr("#tunnels\n");
-            else if (nb_tunnels <= 1)
-                return (ERROR);
-            if (set_links(infos, str) == ERROR_FORMAT) {
-                free(str);
-                return (ERROR);
-            }
-            nb_tunnels = 3;
+        if (read_loop(str, &nb_tunnels, infos)) {
+            nb_tunnels = 0;
+            break;
         }
     }
+    free(str);
     if (nb_tunnels != 3)
         return (ERROR);
     return (0);

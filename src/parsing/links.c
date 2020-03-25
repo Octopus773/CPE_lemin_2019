@@ -8,6 +8,7 @@
 #include "lemin.h"
 #include "my.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 char *get_first_link(char *str)
 {
@@ -75,6 +76,7 @@ int set_links(lemin_t *infos, char *str)
     create_link(second, first, infos);
     free(first);
     free(second);
-    my_putstr(str);
+    write(1, str, word_len(str, '\n'));
+    my_putchar('\n');
     return (0);
 }

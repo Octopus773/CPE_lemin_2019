@@ -55,6 +55,10 @@ lemin_t *get_lemin(void);
 ant_t *get_ants(lemin_t *lemin);
 bool play_a_turn(ant_t *ants, rooms_t *end_room);
 
+int read_loop(char *str, int *nb_tunnels, lemin_t *infos);
+void room_set_coord(rooms_t *room, char *str);
+int get_type(char *str);
+
 rooms_t *get_start_room(lemin_t *lemin);
 rooms_t *get_end_room(lemin_t *lemin);
 int get_rooms(lemin_t *infos);
