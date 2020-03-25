@@ -8,6 +8,7 @@
 
 SRC = src/parsing/get_nb_ants.c \
 	  src/parsing/get_rooms.c \
+	  src/parsing/init_room.c \
 	  src/parsing/links.c \
 	  src/parsing/parsing1.c \
 	  src/parsing/word_len.c \

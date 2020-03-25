@@ -27,7 +27,6 @@ char **my_str_to_word_array(char const *str)
     char const *ptr = str;
     int ret_inc = 0;
     char *new;
-
     for (int i = 0, inc = 1; i <= size; i++, inc++) {
         if (str[i] >= 33 && str[i] <= 126)
             continue;
