@@ -12,7 +12,7 @@ int main(void)
 {
     lemin_t *lemin = get_lemin();
     ant_t *ants = get_ants(lemin);
-    lily_list *end_room = get_end_room(lemin);
+    rooms_t *end_room = get_end_room(lemin);
 
     if (!lemin || !ants || ! end_room)
         return (ERROR);

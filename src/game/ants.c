@@ -9,24 +9,24 @@
 #include "lily.h"
 #include <stddef.h>
 
-lily_list *get_start_room(lemin_t *lemin)
+rooms_t *get_start_room(lemin_t *lemin)
 {
     if (!lemin)
         return (NULL);
     FOREACH(rooms_t, room, i, lemin->map)
         if (room->type == START)
-            return (i);
+            return (room);
     ENDFOREACH(i, lemin->map)
     return (NULL);
 }
 
-lily_list *get_end_room(lemin_t *lemin)
+rooms_t *get_end_room(lemin_t *lemin)
 {
     if (!lemin)
         return (NULL);
     FOREACH(rooms_t, room, i, lemin->map)
         if (room->type == END)
-            return (i);
+            return (room);
     ENDFOREACH(i, lemin->map)
     return (NULL);
 }
@@ -35,7 +35,7 @@ ant_t *get_ants(lemin_t *lemin)
 {
     static int id = 1;
     ant_t *ants;
-    lily_list *start_room = get_start_room(lemin);
+    rooms_t *start_room = get_start_room(lemin);
 
     if (!lemin || !start_room)
         return (NULL);

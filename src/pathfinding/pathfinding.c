@@ -36,5 +36,5 @@ rooms_t *get_best_room(ant_t *ant)
 {
     if (!ant)
         return (NULL);
-    return (proceed_room(ant->current_room->data, ant->old_room->data));
+    return (proceed_room(ant->current_room, ant->old_room));
 }

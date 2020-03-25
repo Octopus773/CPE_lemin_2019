@@ -12,26 +12,25 @@
 
 bool move_ant(ant_t *ant)
 {
-    rooms_t *room;
-    rooms_t *tmp;
     bool move_made = false;
+    rooms_t *tmp;
 
     tmp = get_best_room(ant);
     if (tmp) {
+        my_printf("get room %s for ant %i\n", tmp->name, ant->id);
         ant->old_room = ant->current_room;
         ant->current_room = tmp;
     }
     // SHOULD USE PATHFINDING HERE.
     if (ant->current_room != ant->old_room) {
-        room = ant->current_room->data;
-        my_printf("P%d-%s", ant->id, room->name);
+        my_printf("P%d-%s", ant->id, ant->current_room->name);
         move_made = true;
     }
     ant->old_room = ant->current_room;
     return (move_made);
 }
 
-bool play_a_turn(ant_t *ants, lily_list *end_room)
+bool play_a_turn(ant_t *ants, rooms_t *end_room)
 {
     bool done = true;
     bool move_made = false;

@@ -48,6 +48,7 @@ int set_room(lemin_t *infos, char *str, char type)
     room->type = type;
     room->occupied = false;
     room->score = 0;
+    room->links = NULL;
     room->is_proceeded = false;
     room_set_coord(room, str);
     FOREACH(rooms_t, tmp, i, infos->map)
