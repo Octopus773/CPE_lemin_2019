@@ -63,6 +63,7 @@ rooms_t *get_start_room(lemin_t *lemin);
 rooms_t *get_end_room(lemin_t *lemin);
 int get_rooms(lemin_t *infos);
 
+rooms_t *proceed_room(rooms_t *room, rooms_t *prev_room);
 rooms_t *get_best_room(ant_t *ant);
 
 #endif /* !LEMIN_H_ */
