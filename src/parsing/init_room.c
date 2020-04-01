@@ -35,7 +35,8 @@ int set_room(lemin_t *infos, char *str, char type)
     init_room(room, len, type);
     room_set_coord(room, str);
     FOREACH(rooms_t, tmp, i, infos->map)
-        if (my_strcmp(tmp->name, room->name) == 0
+        if ((my_strcmp(tmp->name, room->name) == 0
+        && my_strlen(tmp->name) == my_strlen(room->name))
         || (tmp->x == room->x && tmp->y == room->y))
             return (ERROR_FORMAT);
     ENDFOREACH(i, infos->map)

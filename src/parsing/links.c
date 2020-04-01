@@ -46,7 +46,8 @@ char *get_second_link(char *str)
 rooms_t *find_node(lemin_t *infos, char *str)
 {
     FOREACH(rooms_t, room, i, infos->map)
-        if (my_strcmp(room->name, str) == 0)
+        if (my_strcmp(room->name, str) == 0
+        && my_strlen(str) == my_strlen(room->name))
             return (room);
     ENDFOREACH(i, infos->map)
     return (NULL);

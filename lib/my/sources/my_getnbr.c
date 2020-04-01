@@ -18,7 +18,7 @@ int my_getnbr(char const *str)
         if (str[n] >= '0' && str[n] <= '9')
             nbr = nbr * 10 + (str[n] - '0');
         if (!(str[n] >= '0' && str[n] <= '9')
-        && str[n] != '+' && str[n] != '-')
+            && str[n] != '+' && str[n] != '-')
             break;
     }
     if (is_neg % 2 == 1)
