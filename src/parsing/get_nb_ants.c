@@ -28,6 +28,8 @@ int get_nb_ants(lemin_t *infos)
     while ((!str || *str == '#') && getline(&str, &nb, stdin) >= 1);
     if (check_nb_ants(str) != 0)
         return (ERROR_FORMAT);
+    if (!my_getnbr(str))
+        return (ERROR_FORMAT);
     infos->nb_ant = my_getnbr(str);
     my_putstr("#number_of_ants\n");
     my_put_nbr(infos->nb_ant);
