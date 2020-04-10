@@ -35,9 +35,8 @@ int set_room(lemin_t *infos, char *str, char type)
     init_room(room, len, type);
     room_set_coord(room, str);
     FOREACH(rooms_t, tmp, i, infos->map)
-        if ((my_strcmp(tmp->name, room->name) == 0
-        && my_strlen(tmp->name) == my_strlen(room->name))
-        || (tmp->x == room->x && tmp->y == room->y))
+        if ((my_strcmp(tmp->name, room->name) == 0 && my_strlen(tmp->name)
+        == my_strlen(room->name)) || (tmp->x == room->x && tmp->y == room->y))
             return (ERROR_FORMAT);
     ENDFOREACH(i, infos->map)
     lily_add_node(&infos->map, lily_create_node(room), 0);
@@ -49,16 +48,17 @@ int loop_for_ends(char *str, int *nb_tunnels, lemin_t *infos)
     size_t nb = 0;
 
     if (my_strcmp(str, "##start") == 0) {
-        if (getline(&str, &nb, stdin) < 2)
-            return (ERROR);
+        while (*str == '#')
+            if (getline(&str, &nb, stdin) < 2)
+                return (ERROR);
         my_putstr("##start\n");
         if (set_room(infos, str, START))
             return (ERROR);
         (*nb_tunnels) += 1;
-    }
-    else if (my_strcmp(str, "##end") == 0) {
-        if (getline(&str, &nb, stdin) < 2)
-            return (ERROR);
+    } else if (my_strcmp(str, "##end") == 0) {
+        while (*str == '#')
+            if (getline(&str, &nb, stdin) < 2)
+                return (ERROR);
         my_putstr("##end\n");
         if (set_room(infos, str, END))
             return (ERROR);
