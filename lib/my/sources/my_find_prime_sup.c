@@ -4,6 +4,7 @@
 ** File description:
 ** task07 day05
 */
+
 static int my_is_prime_spec(int nb);
 
 int my_find_prime_sup(int nb)
