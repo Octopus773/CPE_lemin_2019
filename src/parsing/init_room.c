@@ -63,8 +63,7 @@ int loop_for_ends(char *str, int *nb_tunnels, lemin_t *infos)
         if (set_room(infos, str, END))
             return (ERROR);
         (*nb_tunnels) += 1;
-    } else if (str[1] == '#')
-        return (ERROR);
+    }
     return (0);
 }
 
