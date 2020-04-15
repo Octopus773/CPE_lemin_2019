@@ -47,7 +47,7 @@ int loop_for_ends(char *str, int *nb_tunnels, lemin_t *infos)
 {
     size_t nb = 0;
 
-    if (my_strcmp(str, "##start") == 0) {
+    if (my_strcmp(str, "##start") == 0 && my_strlen(str) == 8) {
         while (*str == '#')
             if (getline(&str, &nb, stdin) < 2)
                 return (ERROR);
@@ -55,7 +55,7 @@ int loop_for_ends(char *str, int *nb_tunnels, lemin_t *infos)
         if (set_room(infos, str, START))
             return (ERROR);
         (*nb_tunnels) += 1;
-    } else if (my_strcmp(str, "##end") == 0) {
+    } else if (my_strcmp(str, "##end") == 0 && my_strlen(str) == 6) {
         while (*str == '#')
             if (getline(&str, &nb, stdin) < 2)
                 return (ERROR);
