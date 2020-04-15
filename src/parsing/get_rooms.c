@@ -25,14 +25,19 @@ void print_room(rooms_t *room)
     my_putchar('\n');
 }
 
-void room_set_coord(rooms_t *room, char *str)
+int room_set_coord(rooms_t *room, char *str)
 {
     room->x = my_getnbr(str);
+    for (int i = 0; str[i] && str[i] != '\n' && str[i] != '#'; i++) {
+        if (str[i] != ' ' && !(str[i] >= '0' && str[i] <= '9'))
+            return (ERROR);
+    }
     for (; *str && *str != ' '; str = &str[1]);
     if (str)
         str = &str[1];
     room->y = my_getnbr(str);
     print_room(room);
+    return (0);
 }
 
 int get_type(char *str)
