@@ -29,7 +29,8 @@ void room_set_coord(rooms_t *room, char *str)
 {
     room->x = my_getnbr(str);
     for (; *str && *str != ' '; str = &str[1]);
-    str = &str[1];
+    if (str)
+        str = &str[1];
     room->y = my_getnbr(str);
     print_room(room);
 }
