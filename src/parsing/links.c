@@ -69,6 +69,12 @@ int set_links(lemin_t *infos, char *str)
     char *first = get_first_link(str);
     char *second = get_second_link(str);
 
+    for (int i = 0; str[i + 1] != '\n' && str[i + 1]; i++) {
+        if (str[i] == '#')
+            break;
+        if (str[i] == ' ' && str[i + 1] != '#')
+            return (ERROR_FORMAT);
+    }
     if (!first)
         return (ERROR_MALLOC);
     if (create_link(first, second, infos) == ERROR_FORMAT)
